@@ -145,7 +145,27 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      appointment_slots: {
+        Row: {
+          appointment_date: string | null
+          appointment_time: string | null
+          duration_minutes: number | null
+          status: string | null
+        }
+        Insert: {
+          appointment_date?: string | null
+          appointment_time?: string | null
+          duration_minutes?: number | null
+          status?: string | null
+        }
+        Update: {
+          appointment_date?: string | null
+          appointment_time?: string | null
+          duration_minutes?: number | null
+          status?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
