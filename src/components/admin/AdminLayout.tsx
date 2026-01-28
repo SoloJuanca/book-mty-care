@@ -2,7 +2,7 @@ import { useState, useEffect, ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Calendar, Settings, LogOut, Menu, X, Loader2 } from "lucide-react";
+import { Calendar, Settings, LogOut, Menu, X, Loader2, Star } from "lucide-react";
 import { User } from "@supabase/supabase-js";
 import isotipo from "@/assets/isotipo.png";
 
@@ -13,6 +13,7 @@ interface AdminLayoutProps {
 const navItems = [
   { href: "/admin/citas", label: "Citas", icon: Calendar },
   { href: "/admin/disponibilidad", label: "Disponibilidad", icon: Settings },
+  { href: "/admin/resenas", label: "Reseñas", icon: Star },
 ];
 
 export function AdminLayout({ children }: AdminLayoutProps) {

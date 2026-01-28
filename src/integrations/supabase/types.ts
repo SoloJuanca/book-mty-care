@@ -152,6 +152,106 @@ export type Database = {
         }
         Relationships: []
       }
+      review_requests: {
+        Row: {
+          appointment_id: string
+          client_email: string
+          client_name: string
+          completed_at: string | null
+          created_at: string
+          expires_at: string
+          id: string
+          request_token: string
+          sent_at: string
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          appointment_id: string
+          client_email: string
+          client_name: string
+          completed_at?: string | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          request_token?: string
+          sent_at?: string
+          status?: string
+          user_id?: string | null
+        }
+        Update: {
+          appointment_id?: string
+          client_email?: string
+          client_name?: string
+          completed_at?: string | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          request_token?: string
+          sent_at?: string
+          status?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "review_requests_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: true
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          appointment_id: string
+          client_location: string | null
+          client_name: string
+          created_at: string
+          id: string
+          is_approved: boolean
+          is_featured: boolean
+          rating: number
+          review_text: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          appointment_id: string
+          client_location?: string | null
+          client_name: string
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          is_featured?: boolean
+          rating: number
+          review_text: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          appointment_id?: string
+          client_location?: string | null
+          client_name?: string
+          created_at?: string
+          id?: string
+          is_approved?: boolean
+          is_featured?: boolean
+          rating?: number
+          review_text?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: true
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       service_durations: {
         Row: {
           created_at: string
