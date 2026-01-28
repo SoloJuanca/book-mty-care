@@ -227,13 +227,26 @@ export default function BookingPage() {
       if (error) throw error;
 
       setStep("confirmation");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error creating appointment:", error);
+      
+      // Check if it's an overlap error from the database trigger
+      const isOverlapError = error?.message?.includes("ya no está disponible") || 
+                             error?.message?.includes("overlap");
+      
       toast({
-        title: "Error",
-        description: "No se pudo crear la cita. Por favor intenta de nuevo.",
+        title: isOverlapError ? "Horario no disponible" : "Error",
+        description: isOverlapError 
+          ? "Este horario fue reservado por alguien más. Por favor selecciona otro horario."
+          : "No se pudo crear la cita. Por favor intenta de nuevo.",
         variant: "destructive",
       });
+      
+      // If overlap error, go back to time selection and refresh slots
+      if (isOverlapError) {
+        setStep("time");
+        fetchAvailableSlots();
+      }
     } finally {
       setSubmitting(false);
     }
