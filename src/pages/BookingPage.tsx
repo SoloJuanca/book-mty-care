@@ -221,10 +221,32 @@ export default function BookingPage() {
         client_phone: formData.phone,
         client_email: formData.email || null,
         notes: formData.notes || null,
-        user_id: user?.id || null, // Link to user account if logged in
+        user_id: user?.id || null,
       });
 
       if (error) throw error;
+
+      // Send email notification (fire and forget - don't block confirmation)
+      supabase.functions.invoke("send-notification", {
+        body: {
+          type: "new_appointment",
+          appointment: {
+            client_name: formData.name,
+            client_email: formData.email || undefined,
+            client_phone: formData.phone,
+            service: formData.service,
+            appointment_date: format(formData.date, "yyyy-MM-dd"),
+            appointment_time: formData.time + ":00",
+          },
+          admin_email: "ccarlosmmora13@gmail.com", // TODO: Make this configurable
+        },
+      }).then((res) => {
+        if (res.error) {
+          console.error("Error sending notification:", res.error);
+        } else {
+          console.log("Notification sent:", res.data);
+        }
+      });
 
       setStep("confirmation");
     } catch (error: any) {

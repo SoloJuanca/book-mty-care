@@ -89,6 +89,9 @@ export default function AdminAppointments() {
   };
 
   const updateStatus = async (id: string, status: string) => {
+    // Find the appointment to get client info for notification
+    const appointment = appointments.find((a) => a.id === id);
+    
     try {
       const { error } = await supabase
         .from("appointments")
@@ -101,6 +104,29 @@ export default function AdminAppointments() {
         prev.map((a) => (a.id === id ? { ...a, status } : a))
       );
       toast({ title: "Actualizado", description: `Cita marcada como ${statusLabels[status]}.` });
+
+      // Send email notification for confirm/cancel (fire and forget)
+      if (appointment && (status === "confirmed" || status === "cancelled")) {
+        supabase.functions.invoke("send-notification", {
+          body: {
+            type: status === "confirmed" ? "appointment_confirmed" : "appointment_cancelled",
+            appointment: {
+              client_name: appointment.client_name,
+              client_email: appointment.client_email || undefined,
+              client_phone: appointment.client_phone,
+              service: appointment.service,
+              appointment_date: appointment.appointment_date,
+              appointment_time: appointment.appointment_time,
+            },
+          },
+        }).then((res) => {
+          if (res.error) {
+            console.error("Error sending notification:", res.error);
+          } else {
+            console.log("Notification sent:", res.data);
+          }
+        });
+      }
     } catch (error) {
       console.error("Error updating status:", error);
       toast({
