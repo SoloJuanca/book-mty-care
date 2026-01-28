@@ -225,6 +225,11 @@ const handler = async (req: Request): Promise<Response> => {
       throw new Error("BREVO_API_KEY is not configured");
     }
 
+    // Sender configuration (Brevo will only honor verified senders/domains)
+    const SENDER_NAME = "Roberto Nieto Fisioterapia";
+    const SENDER_EMAIL = "noreply@robertonieto.mx";
+    console.log("Using sender:", { name: SENDER_NAME, email: SENDER_EMAIL });
+
     const { type, appointment, admin_email }: NotificationRequest = await req.json();
     console.log("Notification request:", {
       type,
@@ -247,8 +252,8 @@ const handler = async (req: Request): Promise<Response> => {
         },
         body: JSON.stringify({
           sender: {
-            name: "Roberto Nieto Fisioterapia",
-            email: "noreply@robertonieto.mx",
+            name: SENDER_NAME,
+            email: SENDER_EMAIL,
           },
           to: [{ email: appointment.client_email, name: appointment.client_name }],
           subject: clientEmail.subject,
@@ -281,7 +286,7 @@ const handler = async (req: Request): Promise<Response> => {
         body: JSON.stringify({
           sender: {
             name: "Sistema de Citas",
-            email: "noreply@robertonieto.mx",
+            email: SENDER_EMAIL,
           },
           to: [{ email: admin_email }],
           subject: adminEmailContent.subject,
@@ -301,7 +306,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Notification results:", results);
 
-    return new Response(JSON.stringify({ success: true, results }), {
+    return new Response(JSON.stringify({ success: true, results, sender: { name: SENDER_NAME, email: SENDER_EMAIL } }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
