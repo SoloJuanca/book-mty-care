@@ -14,6 +14,7 @@ const navItems = [
   { href: "/admin/citas", label: "Citas", icon: Calendar },
   { href: "/admin/disponibilidad", label: "Disponibilidad", icon: Settings },
   { href: "/admin/resenas", label: "Reseñas", icon: Star },
+  { href: "/admin/configuracion", label: "Configuración", icon: Settings },
 ];
 
 export function AdminLayout({ children }: AdminLayoutProps) {

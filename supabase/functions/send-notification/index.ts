@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,7 +17,11 @@ interface NotificationRequest {
     appointment_date: string;
     appointment_time: string;
   };
-  admin_email?: string;
+}
+
+interface AdminEmail {
+  email: string;
+  name: string | null;
 }
 
 const SERVICE_LABELS: Record<string, string> = {
@@ -211,6 +216,31 @@ const generateAdminEmail = (appointment: NotificationRequest["appointment"], typ
   };
 };
 
+const getAdminEmails = async (): Promise<AdminEmail[]> => {
+  const supabaseUrl = Deno.env.get("SUPABASE_URL");
+  const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    console.error("Missing Supabase credentials");
+    return [];
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+  const { data, error } = await supabase
+    .from("admin_emails")
+    .select("email, name")
+    .eq("is_active", true);
+
+  if (error) {
+    console.error("Error fetching admin emails:", error);
+    return [];
+  }
+
+  console.log("Fetched admin emails:", data?.length || 0);
+  return data || [];
+};
+
 const handler = async (req: Request): Promise<Response> => {
   console.log("send-notification function called");
 
@@ -230,7 +260,7 @@ const handler = async (req: Request): Promise<Response> => {
     const SENDER_EMAIL = "noreply@robertonieto.mx";
     console.log("Using sender:", { name: SENDER_NAME, email: SENDER_EMAIL });
 
-    const { type, appointment, admin_email }: NotificationRequest = await req.json();
+    const { type, appointment }: NotificationRequest = await req.json();
     console.log("Notification request:", {
       type,
       appointment: { ...appointment, client_email: appointment.client_email ? "***" : undefined },
@@ -271,37 +301,48 @@ const handler = async (req: Request): Promise<Response> => {
       });
     }
 
-    // Send email to admin for new appointments
-    if (type === "new_appointment" && admin_email) {
-      const adminEmailContent = generateAdminEmail(appointment, type);
-      console.log("Sending admin email to:", admin_email);
+    // Send email to all active admins for new appointments
+    if (type === "new_appointment") {
+      const adminEmails = await getAdminEmails();
+      console.log("Admin emails to notify:", adminEmails.map((e) => e.email));
 
-      const adminResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "api-key": BREVO_API_KEY,
-        },
-        body: JSON.stringify({
-          sender: {
-            name: "Sistema de Citas",
-            email: SENDER_EMAIL,
-          },
-          to: [{ email: admin_email }],
-          subject: adminEmailContent.subject,
-          htmlContent: adminEmailContent.htmlContent,
-        }),
-      });
+      if (adminEmails.length > 0) {
+        const adminEmailContent = generateAdminEmail(appointment, type);
 
-      const adminResult = await adminResponse.json();
-      console.log("Admin email result:", adminResponse.status, adminResult);
+        // Send to all admins
+        for (const admin of adminEmails) {
+          console.log("Sending admin email to:", admin.email);
 
-      results.push({
-        to: "admin",
-        success: adminResponse.ok,
-        error: !adminResponse.ok ? JSON.stringify(adminResult) : undefined,
-      });
+          const adminResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "api-key": BREVO_API_KEY,
+            },
+            body: JSON.stringify({
+              sender: {
+                name: "Sistema de Citas",
+                email: SENDER_EMAIL,
+              },
+              to: [{ email: admin.email, name: admin.name || undefined }],
+              subject: adminEmailContent.subject,
+              htmlContent: adminEmailContent.htmlContent,
+            }),
+          });
+
+          const adminResult = await adminResponse.json();
+          console.log("Admin email result for", admin.email, ":", adminResponse.status, adminResult);
+
+          results.push({
+            to: `admin:${admin.email}`,
+            success: adminResponse.ok,
+            error: !adminResponse.ok ? JSON.stringify(adminResult) : undefined,
+          });
+        }
+      } else {
+        console.warn("No active admin emails configured");
+      }
     }
 
     console.log("Notification results:", results);

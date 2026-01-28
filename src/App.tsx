@@ -14,6 +14,7 @@ import AdminAvailability from "./pages/admin/AdminAvailability";
 import ClientAuth from "./pages/auth/ClientAuth";
 import ClientDashboard from "./pages/client/ClientDashboard";
 import AdminReviews from "./pages/admin/AdminReviews";
+import AdminSettings from "./pages/admin/AdminSettings";
 import ReviewPage from "./pages/ReviewPage";
 import NotFound from "./pages/NotFound";
 
@@ -40,6 +41,7 @@ const App = () => (
               <Route path="/admin/citas" element={<AdminAppointments />} />
               <Route path="/admin/disponibilidad" element={<AdminAvailability />} />
               <Route path="/admin/resenas" element={<AdminReviews />} />
+              <Route path="/admin/configuracion" element={<AdminSettings />} />
               <Route path="/resena" element={<ReviewPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
