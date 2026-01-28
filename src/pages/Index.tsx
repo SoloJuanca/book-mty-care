@@ -27,15 +27,7 @@ const testimonials = [
   },
 ];
 
-const locations = [
-  "Monterrey",
-  "San Pedro",
-  "Guadalupe",
-  "Apodaca",
-  "San Nicolás",
-  "Santa Catarina",
-  "Escobedo",
-];
+const locations = ["Monterrey", "San Pedro", "Guadalupe", "Apodaca", "San Nicolás", "Santa Catarina", "Escobedo"];
 
 export default function Index() {
   return (
@@ -49,14 +41,23 @@ export default function Index() {
               <Home className="h-4 w-4" />
               <span>Atención a domicilio en Monterrey y Zona Metropolitana</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-              Tu bienestar físico{" "}
-              <span className="text-gradient">comienza aquí</span>
+            <h1
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up"
+              style={{ animationDelay: "0.1s" }}
+            >
+              Tu bienestar físico <span className="text-gradient">comienza aquí</span>
             </h1>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: "0.2s" }}>
-              Fisioterapia y rehabilitación a domicilio en Monterrey. Tratamientos personalizados para recuperar tu movilidad y mejorar tu calidad de vida.
+            <p
+              className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-up"
+              style={{ animationDelay: "0.2s" }}
+            >
+              Fisioterapia y rehabilitación a domicilio en Monterrey. Tratamientos personalizados para recuperar tu
+              movilidad y mejorar tu calidad de vida.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: "0.3s" }}>
+            <div
+              className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up"
+              style={{ animationDelay: "0.3s" }}
+            >
               <Link to="/reservar">
                 <Button size="lg" className="w-full sm:w-auto font-semibold gap-2">
                   Reservar Cita <ArrowRight className="h-4 w-4" />
@@ -100,11 +101,10 @@ export default function Index() {
       <section className="section-padding">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-              Nuestros Servicios
-            </h2>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">Nuestros Servicios</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Ofrecemos una gama completa de servicios de rehabilitación y bienestar adaptados a tus necesidades específicas.
+              Ofrecemos una gama completa de servicios de rehabilitación y bienestar adaptados a tus necesidades
+              específicas.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -127,11 +127,10 @@ export default function Index() {
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6">
-                ¿Por qué elegir Rehabs MTY?
-              </h2>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6">¿Por qué elegir Rehabs MTY?</h2>
               <p className="text-muted-foreground mb-8">
-                Somos un equipo de profesionales comprometidos con tu recuperación y bienestar. Combinamos experiencia, tecnología y un trato personalizado.
+                Somos un equipo de profesionales comprometidos con tu recuperación y bienestar. Combinamos experiencia,
+                tecnología y un trato personalizado.
               </p>
               <ul className="space-y-4">
                 {[
@@ -161,25 +160,19 @@ export default function Index() {
                 <div className="p-6 rounded-xl bg-primary text-primary-foreground">
                   <Users className="h-8 w-8 mb-3" />
                   <h3 className="font-display font-semibold mb-1">Atención Personal</h3>
-                  <p className="text-sm opacity-90">
-                    Cada paciente recibe atención individualizada
-                  </p>
+                  <p className="text-sm opacity-90">Cada paciente recibe atención individualizada</p>
                 </div>
               </div>
-                <div className="space-y-4 pt-8">
+              <div className="space-y-4 pt-8">
                 <div className="p-6 rounded-xl bg-card border border-border card-elevated">
                   <Home className="h-8 w-8 text-primary mb-3" />
                   <h3 className="font-display font-semibold mb-1">A Domicilio</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Atención en la comodidad de tu hogar
-                  </p>
+                  <p className="text-sm text-muted-foreground">Atención en la comodidad de tu hogar</p>
                 </div>
                 <div className="p-6 rounded-xl bg-secondary">
                   <CheckCircle2 className="h-8 w-8 text-primary mb-3" />
                   <h3 className="font-display font-semibold mb-1">Resultados</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Enfoque en resultados medibles y duraderos
-                  </p>
+                  <p className="text-sm text-muted-foreground">Enfoque en resultados medibles y duraderos</p>
                 </div>
               </div>
             </div>
@@ -191,9 +184,7 @@ export default function Index() {
       <section className="section-padding">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">
-              Lo que dicen nuestros pacientes
-            </h2>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">Lo que dicen nuestros pacientes</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               La satisfacción de nuestros pacientes es nuestra mejor carta de presentación.
             </p>
@@ -217,10 +208,7 @@ export default function Index() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {locations.map((location) => (
-              <span
-                key={location}
-                className="px-4 py-2 rounded-full bg-card border border-border text-sm font-medium"
-              >
+              <span key={location} className="px-4 py-2 rounded-full bg-card border border-border text-sm font-medium">
                 {location}
               </span>
             ))}
@@ -232,9 +220,7 @@ export default function Index() {
       <section className="section-padding">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center p-8 sm:p-12 rounded-2xl hero-gradient text-primary-foreground">
-            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">
-              ¿Listo para sentirte mejor?
-            </h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">¿Listo para sentirte mejor?</h2>
             <p className="opacity-90 mb-8 max-w-xl mx-auto">
               Agenda tu cita hoy y da el primer paso hacia una vida sin dolor. Nuestro equipo te está esperando.
             </p>
@@ -245,7 +231,11 @@ export default function Index() {
                 </Button>
               </Link>
               <a href="https://wa.me/528443565667" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto font-semibold border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full sm:w-auto font-semibold border-primary-foreground/30 text-primary hover:bg-primary-foreground/10"
+                >
                   Contactar por WhatsApp
                 </Button>
               </a>
