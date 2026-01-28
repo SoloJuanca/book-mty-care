@@ -103,12 +103,11 @@ export default function BookingPage() {
         return;
       }
 
-      // Get existing appointments for this date
+      // Get existing appointments for this date (using secure view that doesn't expose PII)
       const { data: appointments } = await supabase
-        .from("appointments")
+        .from("appointment_slots")
         .select("appointment_time, duration_minutes")
-        .eq("appointment_date", dateStr)
-        .neq("status", "cancelled");
+        .eq("appointment_date", dateStr);
 
       // Generate time slots
       const startTime = parse(availability.start_time, "HH:mm:ss", new Date());
