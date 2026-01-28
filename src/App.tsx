@@ -13,6 +13,8 @@ import AdminAppointments from "./pages/admin/AdminAppointments";
 import AdminAvailability from "./pages/admin/AdminAvailability";
 import ClientAuth from "./pages/auth/ClientAuth";
 import ClientDashboard from "./pages/client/ClientDashboard";
+import AdminReviews from "./pages/admin/AdminReviews";
+import ReviewPage from "./pages/ReviewPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +39,8 @@ const App = () => (
               <Route path="/admin" element={<AdminLogin />} />
               <Route path="/admin/citas" element={<AdminAppointments />} />
               <Route path="/admin/disponibilidad" element={<AdminAvailability />} />
+              <Route path="/admin/resenas" element={<AdminReviews />} />
+              <Route path="/resena" element={<ReviewPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

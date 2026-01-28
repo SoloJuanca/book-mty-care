@@ -1,31 +1,10 @@
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { ServiceCard } from "@/components/ServiceCard";
-import { TestimonialCard } from "@/components/TestimonialCard";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/services";
 import { CheckCircle2, Home, Award, Users, ArrowRight } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "María García",
-    location: "San Pedro Garza García",
-    text: "Después de mi cirugía de rodilla, la rehabilitación en Rehabs MTY fue fundamental para mi recuperación. El equipo es muy profesional y atento.",
-    rating: 5,
-  },
-  {
-    name: "Carlos Rodríguez",
-    location: "Monterrey Centro",
-    text: "Llevaba años con dolor de espalda. Con las sesiones de quiropraxia finalmente encontré alivio. Totalmente recomendado.",
-    rating: 5,
-  },
-  {
-    name: "Ana Martínez",
-    location: "Guadalupe, N.L.",
-    text: "Los masajes descontracturantes son excelentes. El ambiente es muy relajante y el terapeuta muy profesional. Volveré pronto.",
-    rating: 5,
-  },
-];
 
 const locations = ["Monterrey", "San Pedro", "Guadalupe", "Apodaca", "San Nicolás", "Santa Catarina", "Escobedo"];
 
@@ -181,21 +160,7 @@ export default function Index() {
       </section>
 
       {/* Testimonials */}
-      <section className="section-padding">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">Lo que dicen nuestros pacientes</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              La satisfacción de nuestros pacientes es nuestra mejor carta de presentación.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, i) => (
-              <TestimonialCard key={i} {...testimonial} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection />
 
       {/* Locations */}
       <section className="section-padding bg-muted/30">
