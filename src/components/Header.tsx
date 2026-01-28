@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, User } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 import logo from "@/assets/logo.png";
 import isotipo from "@/assets/isotipo.png";
 
@@ -15,6 +16,10 @@ const navLinks = [
 export function Header() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { user, loading, isAdmin } = useAuth();
+
+  const accountLink = isAdmin ? "/admin/citas" : user ? "/mi-cuenta" : "/cuenta";
+  const accountLabel = isAdmin ? "Admin" : user ? "Mi Cuenta" : "Mi Cuenta";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -48,6 +53,12 @@ export function Header() {
               <span className="hidden md:inline">844 356 5667</span>
             </Button>
           </a>
+          <Link to={accountLink} className="hidden sm:flex">
+            <Button variant="ghost" size="sm" className="gap-2">
+              <User className="h-4 w-4" />
+              <span className="hidden md:inline">{accountLabel}</span>
+            </Button>
+          </Link>
           <Link to="/reservar">
             <Button size="sm" className="font-semibold">
               Reservar Cita
@@ -80,6 +91,14 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              to={accountLink}
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-3 text-sm font-medium rounded-md transition-colors text-muted-foreground hover:text-foreground hover:bg-muted flex items-center gap-2"
+            >
+              <User className="h-4 w-4" />
+              {accountLabel}
+            </Link>
           </div>
         </nav>
       )}

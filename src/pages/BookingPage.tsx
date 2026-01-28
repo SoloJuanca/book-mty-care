@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,9 +9,10 @@ import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { services, getServiceById } from "@/lib/services";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { format, addDays, isBefore, startOfToday, parse } from "date-fns";
 import { es } from "date-fns/locale";
-import { CheckCircle2, ArrowLeft, ArrowRight, Clock, Calendar as CalendarIcon, Loader2 } from "lucide-react";
+import { CheckCircle2, ArrowLeft, ArrowRight, Clock, Calendar as CalendarIcon, Loader2, User, LogIn } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
 
@@ -32,6 +33,7 @@ export default function BookingPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, loading: authLoading } = useAuth();
   
   const initialService = searchParams.get("servicio") || "";
   const validInitialService = ["rehabilitacion", "quiropraxia", "masajes_descontracturantes", "masajes_relajantes"].includes(initialService) 
@@ -51,8 +53,38 @@ export default function BookingPage() {
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [profileLoaded, setProfileLoaded] = useState(false);
 
   const selectedService = formData.service ? getServiceById(formData.service) : undefined;
+
+  // Pre-fill form with user profile data
+  useEffect(() => {
+    if (user && !profileLoaded) {
+      const fetchProfile = async () => {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("full_name, phone, email")
+          .eq("user_id", user.id)
+          .single();
+
+        if (profile) {
+          setFormData((prev) => ({
+            ...prev,
+            name: profile.full_name || prev.name,
+            phone: profile.phone || prev.phone,
+            email: profile.email || user.email || prev.email,
+          }));
+        } else {
+          setFormData((prev) => ({
+            ...prev,
+            email: user.email || prev.email,
+          }));
+        }
+        setProfileLoaded(true);
+      };
+      fetchProfile();
+    }
+  }, [user, profileLoaded]);
 
   // Fetch available slots when date changes
   useEffect(() => {
@@ -189,6 +221,7 @@ export default function BookingPage() {
         client_phone: formData.phone,
         client_email: formData.email || null,
         notes: formData.notes || null,
+        user_id: user?.id || null, // Link to user account if logged in
       });
 
       if (error) throw error;
@@ -427,6 +460,42 @@ export default function BookingPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Login prompt for guests */}
+                {!user && !authLoading && (
+                  <div className="bg-muted/50 rounded-lg p-4 mb-2">
+                    <div className="flex items-start gap-3">
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <User className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-medium text-sm">¿Tienes cuenta?</h4>
+                        <p className="text-xs text-muted-foreground mb-2">
+                          Inicia sesión para guardar tu cita y ver tu historial
+                        </p>
+                        <Link to={`/cuenta?redirect=/reservar${formData.service ? `&servicio=${formData.service}` : ""}`}>
+                          <Button variant="outline" size="sm" className="gap-2">
+                            <LogIn className="h-4 w-4" />
+                            Iniciar Sesión
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Logged in user indicator */}
+                {user && (
+                  <div className="bg-primary/5 rounded-lg p-3 flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-full hero-gradient flex items-center justify-center">
+                      <User className="h-4 w-4 text-primary-foreground" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium">Reservando como usuario registrado</p>
+                      <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="space-y-2">
                   <Label htmlFor="name">Nombre completo *</Label>
                   <Input
