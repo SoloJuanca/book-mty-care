@@ -1,9 +1,9 @@
-import { useState, useEffect, ReactNode } from "react";
+import { useState, ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Calendar, Settings, LogOut, Menu, X, Loader2, Star } from "lucide-react";
-import { User } from "@supabase/supabase-js";
+import { Calendar, Settings, LogOut, Menu, X, Loader2, Star, ShieldAlert } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import isotipo from "@/assets/isotipo.png";
 
 interface AdminLayoutProps {
@@ -19,33 +19,12 @@ const navItems = [
 export function AdminLayout({ children }: AdminLayoutProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { user, loading, isAdmin } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) {
-        navigate("/admin");
-      } else {
-        setUser(session.user);
-      }
-      setLoading(false);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        navigate("/admin");
-      } else {
-        setUser(session.user);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+    navigate("/admin");
   };
 
   if (loading) {
@@ -56,8 +35,35 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     );
   }
 
+  // Redirect to login if not authenticated
   if (!user) {
+    navigate("/admin");
     return null;
+  }
+
+  // Show access denied if not admin
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-muted/30">
+        <div className="text-center p-8">
+          <div className="h-16 w-16 rounded-full bg-destructive/10 flex items-center justify-center mx-auto mb-4">
+            <ShieldAlert className="h-8 w-8 text-destructive" />
+          </div>
+          <h1 className="font-display text-2xl font-bold mb-2">Acceso Denegado</h1>
+          <p className="text-muted-foreground mb-6">
+            No tienes permisos de administrador para acceder a esta sección.
+          </p>
+          <div className="flex gap-3 justify-center">
+            <Button variant="outline" onClick={() => navigate("/")}>
+              Ir al inicio
+            </Button>
+            <Button variant="ghost" onClick={handleLogout}>
+              Cerrar sesión
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
