@@ -106,9 +106,9 @@ export default function Index() {
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6">¿Por qué elegir Rehabs MTY?</h2>
+              <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6">¿Por qué elegirnos?</h2>
               <p className="text-muted-foreground mb-8">
-                Somos un equipo de profesionales comprometidos con tu recuperación y bienestar. Combinamos experiencia,
+                Roberto Nieto es un profesional comprometido con tu recuperación y bienestar. Combinamos experiencia,
                 tecnología y un trato personalizado.
               </p>
               <ul className="space-y-4">
