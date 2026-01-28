@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Phone, Mail, Clock, Home } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export function Footer() {
   return (
@@ -8,14 +9,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold text-lg">R</span>
-              </div>
-              <span className="font-display font-bold text-xl">Rehabs MTY</span>
-            </div>
+            <img src={logo} alt="Roberto Nieto - Fisioterapia" className="h-12 brightness-0 invert" />
             <p className="text-background/70 text-sm leading-relaxed">
-              Tu centro de rehabilitación y bienestar en Monterrey. Atención profesional y personalizada.
+              Fisioterapeuta profesional con atención a domicilio en Monterrey y Zona Metropolitana. 9 años de experiencia.
             </p>
           </div>
 
@@ -35,16 +31,16 @@ export function Footer() {
             <h4 className="font-display font-semibold">Contacto</h4>
             <ul className="space-y-3 text-sm text-background/70">
               <li className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>Av. Constitución #123, Col. Centro, Monterrey, N.L.</span>
+                <Home className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <span>Servicio a domicilio en Monterrey y Zona Metropolitana</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <a href="tel:+528112345678" className="hover:text-background transition-colors">81 1234 5678</a>
+                <a href="tel:+528443565667" className="hover:text-background transition-colors">844 356 5667</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 flex-shrink-0" />
-                <a href="mailto:contacto@rehabsmty.com" className="hover:text-background transition-colors">contacto@rehabsmty.com</a>
+                <a href="mailto:contacto@robertonieto.com" className="hover:text-background transition-colors">contacto@robertonieto.com</a>
               </li>
             </ul>
           </div>

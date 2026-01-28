@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
+import logo from "@/assets/logo.png";
+import isotipo from "@/assets/isotipo.png";
 
 const navLinks = [
   { href: "/rehabilitacion", label: "Rehabilitación" },
@@ -18,10 +20,8 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-lg hero-gradient flex items-center justify-center">
-            <span className="text-primary-foreground font-display font-bold text-lg">R</span>
-          </div>
-          <span className="font-display font-bold text-xl text-foreground">Rehabs MTY</span>
+          <img src={logo} alt="Roberto Nieto - Fisioterapia" className="h-10 hidden sm:block" />
+          <img src={isotipo} alt="Roberto Nieto" className="h-10 sm:hidden" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -42,10 +42,10 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a href="tel:+528112345678" className="hidden sm:flex">
+          <a href="tel:+528443565667" className="hidden sm:flex">
             <Button variant="outline" size="sm" className="gap-2">
               <Phone className="h-4 w-4" />
-              <span className="hidden md:inline">81 1234 5678</span>
+              <span className="hidden md:inline">844 356 5667</span>
             </Button>
           </a>
           <Link to="/reservar">

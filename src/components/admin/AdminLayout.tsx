@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Calendar, Settings, LogOut, Menu, X, Loader2 } from "lucide-react";
 import { User } from "@supabase/supabase-js";
+import isotipo from "@/assets/isotipo.png";
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -63,9 +64,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
       {/* Mobile Header */}
       <header className="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 h-14 bg-background border-b border-border">
         <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg hero-gradient flex items-center justify-center">
-            <span className="text-primary-foreground font-display font-bold">R</span>
-          </div>
+          <img src={isotipo} alt="Roberto Nieto" className="h-8" />
           <span className="font-display font-bold">Admin</span>
         </Link>
         <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-2">
@@ -83,11 +82,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
           <div className="flex flex-col h-full">
             {/* Logo */}
             <div className="hidden lg:flex items-center gap-2 px-6 h-16 border-b border-border">
-              <div className="h-9 w-9 rounded-lg hero-gradient flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold text-lg">R</span>
-              </div>
+              <img src={isotipo} alt="Roberto Nieto" className="h-9" />
               <div>
-                <span className="font-display font-bold">Rehabs MTY</span>
+                <span className="font-display font-bold">Roberto Nieto</span>
                 <p className="text-xs text-muted-foreground">Panel Admin</p>
               </div>
             </div>
