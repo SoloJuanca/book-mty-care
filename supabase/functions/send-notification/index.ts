@@ -226,7 +226,10 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const { type, appointment, admin_email }: NotificationRequest = await req.json();
-    console.log("Notification request:", { type, appointment: { ...appointment, client_email: appointment.client_email ? "***" : undefined } });
+    console.log("Notification request:", {
+      type,
+      appointment: { ...appointment, client_email: appointment.client_email ? "***" : undefined },
+    });
 
     const results: { to: string; success: boolean; error?: string }[] = [];
 
@@ -238,14 +241,14 @@ const handler = async (req: Request): Promise<Response> => {
       const clientResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-Type": "application/json",
           "api-key": BREVO_API_KEY,
         },
         body: JSON.stringify({
           sender: {
             name: "Roberto Nieto Fisioterapia",
-            email: "noreply@book-mty-care.lovable.app",
+            email: "noreply@robertonieto.mx",
           },
           to: [{ email: appointment.client_email, name: appointment.client_name }],
           subject: clientEmail.subject,
@@ -271,14 +274,14 @@ const handler = async (req: Request): Promise<Response> => {
       const adminResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          "Accept": "application/json",
+          Accept: "application/json",
           "Content-Type": "application/json",
           "api-key": BREVO_API_KEY,
         },
         body: JSON.stringify({
           sender: {
             name: "Sistema de Citas",
-            email: "noreply@book-mty-care.lovable.app",
+            email: "noreply@robertonieto.mx",
           },
           to: [{ email: admin_email }],
           subject: adminEmailContent.subject,
@@ -298,23 +301,17 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Notification results:", results);
 
-    return new Response(
-      JSON.stringify({ success: true, results }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
-    );
+    return new Response(JSON.stringify({ success: true, results }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
   } catch (error: unknown) {
     console.error("Error in send-notification:", error);
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
-    return new Response(
-      JSON.stringify({ success: false, error: errorMessage }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
-    );
+    return new Response(JSON.stringify({ success: false, error: errorMessage }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
   }
 };
 
