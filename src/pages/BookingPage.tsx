@@ -12,7 +12,16 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { format, addDays, isBefore, startOfToday, parse } from "date-fns";
 import { es } from "date-fns/locale";
-import { CheckCircle2, ArrowLeft, ArrowRight, Clock, Calendar as CalendarIcon, Loader2, User, LogIn } from "lucide-react";
+import {
+  CheckCircle2,
+  ArrowLeft,
+  ArrowRight,
+  Clock,
+  Calendar as CalendarIcon,
+  Loader2,
+  User,
+  LogIn,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import type { Database } from "@/integrations/supabase/types";
 
@@ -34,12 +43,17 @@ export default function BookingPage() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user, loading: authLoading } = useAuth();
-  
+
   const initialService = searchParams.get("servicio") || "";
-  const validInitialService = ["rehabilitacion", "quiropraxia", "masajes_descontracturantes", "masajes_relajantes"].includes(initialService) 
-    ? initialService as ServiceType 
+  const validInitialService = [
+    "rehabilitacion",
+    "quiropraxia",
+    "masajes_descontracturantes",
+    "masajes_relajantes",
+  ].includes(initialService)
+    ? (initialService as ServiceType)
     : "";
-  
+
   const [step, setStep] = useState<Step>(validInitialService ? "date" : "service");
   const [formData, setFormData] = useState<FormData>({
     service: validInitialService,
@@ -95,7 +109,7 @@ export default function BookingPage() {
 
   const fetchAvailableSlots = async () => {
     if (!formData.date || !formData.service) return;
-    
+
     setLoading(true);
     try {
       const dayOfWeek = formData.date.getDay();
@@ -123,10 +137,7 @@ export default function BookingPage() {
       const duration = serviceDuration?.duration_minutes || 60;
 
       // Get blocked slots for this date
-      const { data: blockedSlots } = await supabase
-        .from("blocked_slots")
-        .select("*")
-        .eq("blocked_date", dateStr);
+      const { data: blockedSlots } = await supabase.from("blocked_slots").select("*").eq("blocked_date", dateStr);
 
       // Check if full day is blocked
       const fullDayBlocked = blockedSlots?.some((b) => b.is_full_day);
@@ -144,14 +155,14 @@ export default function BookingPage() {
       // Generate time slots
       const startTime = parse(availability.start_time, "HH:mm:ss", new Date());
       const endTime = parse(availability.end_time, "HH:mm:ss", new Date());
-      
+
       const slots: string[] = [];
       let currentTime = startTime;
 
       while (isBefore(currentTime, endTime)) {
         const timeStr = format(currentTime, "HH:mm");
         const currentEnd = new Date(currentTime.getTime() + duration * 60000);
-        
+
         // Check if slot overlaps with existing appointments
         const isBooked = appointments?.some((apt) => {
           const aptStart = parse(apt.appointment_time, "HH:mm:ss", new Date());
@@ -169,8 +180,7 @@ export default function BookingPage() {
           const blockStart = parse(block.start_time, "HH:mm:ss", new Date());
           const blockEnd = parse(block.end_time, "HH:mm:ss", new Date());
           return (
-            (currentTime >= blockStart && currentTime < blockEnd) ||
-            (currentEnd > blockStart && currentEnd <= blockEnd)
+            (currentTime >= blockStart && currentTime < blockEnd) || (currentEnd > blockStart && currentEnd <= blockEnd)
           );
         });
 
@@ -227,43 +237,44 @@ export default function BookingPage() {
       if (error) throw error;
 
       // Send email notification (fire and forget - don't block confirmation)
-      supabase.functions.invoke("send-notification", {
-        body: {
-          type: "new_appointment",
-          appointment: {
-            client_name: formData.name,
-            client_email: formData.email || undefined,
-            client_phone: formData.phone,
-            service: formData.service,
-            appointment_date: format(formData.date, "yyyy-MM-dd"),
-            appointment_time: formData.time + ":00",
+      supabase.functions
+        .invoke("send-notification", {
+          body: {
+            type: "new_appointment",
+            appointment: {
+              client_name: formData.name,
+              client_email: formData.email || undefined,
+              client_phone: formData.phone,
+              service: formData.service,
+              appointment_date: format(formData.date, "yyyy-MM-dd"),
+              appointment_time: formData.time + ":00",
+            },
+            admin_email: "ccarlosmmora13@gmail.com", // TODO: Make this configurable
           },
-          admin_email: "ccarlosmmora13@gmail.com", // TODO: Make this configurable
-        },
-      }).then((res) => {
-        if (res.error) {
-          console.error("Error sending notification:", res.error);
-        } else {
-          console.log("Notification sent:", res.data);
-        }
-      });
+        })
+        .then((res) => {
+          if (res.error) {
+            console.error("Error sending notification:", res.error);
+          } else {
+            console.log("Notification sent:", res.data);
+          }
+        });
 
       setStep("confirmation");
     } catch (error: any) {
       console.error("Error creating appointment:", error);
-      
+
       // Check if it's an overlap error from the database trigger
-      const isOverlapError = error?.message?.includes("ya no está disponible") || 
-                             error?.message?.includes("overlap");
-      
+      const isOverlapError = error?.message?.includes("ya no está disponible") || error?.message?.includes("overlap");
+
       toast({
         title: isOverlapError ? "Horario no disponible" : "Error",
-        description: isOverlapError 
+        description: isOverlapError
           ? "Este horario fue reservado por alguien más. Por favor selecciona otro horario."
           : "No se pudo crear la cita. Por favor intenta de nuevo.",
         variant: "destructive",
       });
-      
+
       // If overlap error, go back to time selection and refresh slots
       if (isOverlapError) {
         setStep("time");
@@ -291,13 +302,11 @@ export default function BookingPage() {
             <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
               <CheckCircle2 className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="font-display text-3xl font-bold mb-4">
-              ¡Cita Registrada!
-            </h1>
+            <h1 className="font-display text-3xl font-bold mb-4">¡Cita Registrada!</h1>
             <p className="text-muted-foreground mb-8">
               Tu solicitud de cita ha sido recibida. Te contactaremos pronto para confirmar.
             </p>
-            
+
             <Card className="text-left mb-8">
               <CardHeader>
                 <CardTitle className="text-lg">Resumen de tu cita</CardTitle>
@@ -332,7 +341,7 @@ export default function BookingPage() {
               <Button onClick={() => navigate("/")} className="font-semibold">
                 Volver al Inicio
               </Button>
-              <a href="https://wa.me/528112345678" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/528442565667" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="w-full font-semibold">
                   Contactar por WhatsApp
                 </Button>
@@ -354,19 +363,13 @@ export default function BookingPage() {
               <div key={s.id} className="flex items-center">
                 <div
                   className={`h-8 w-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    i <= currentStepIndex
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground"
+                    i <= currentStepIndex ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
                   }`}
                 >
                   {i + 1}
                 </div>
                 {i < steps.length - 1 && (
-                  <div
-                    className={`w-8 sm:w-12 h-0.5 mx-1 ${
-                      i < currentStepIndex ? "bg-primary" : "bg-muted"
-                    }`}
-                  />
+                  <div className={`w-8 sm:w-12 h-0.5 mx-1 ${i < currentStepIndex ? "bg-primary" : "bg-muted"}`} />
                 )}
               </div>
             ))}
@@ -423,11 +426,7 @@ export default function BookingPage() {
                 locale={es}
                 className="rounded-xl border"
               />
-              <Button
-                variant="ghost"
-                onClick={() => setStep("service")}
-                className="mt-6 gap-2"
-              >
+              <Button variant="ghost" onClick={() => setStep("service")} className="mt-6 gap-2">
                 <ArrowLeft className="h-4 w-4" />
                 Cambiar servicio
               </Button>
@@ -507,7 +506,9 @@ export default function BookingPage() {
                         <p className="text-xs text-muted-foreground mb-2">
                           Inicia sesión para guardar tu cita y ver tu historial
                         </p>
-                        <Link to={`/cuenta?redirect=/reservar${formData.service ? `&servicio=${formData.service}` : ""}`}>
+                        <Link
+                          to={`/cuenta?redirect=/reservar${formData.service ? `&servicio=${formData.service}` : ""}`}
+                        >
                           <Button variant="outline" size="sm" className="gap-2">
                             <LogIn className="h-4 w-4" />
                             Iniciar Sesión
