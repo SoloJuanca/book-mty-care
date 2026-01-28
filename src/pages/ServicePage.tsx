@@ -38,12 +38,8 @@ export default function ServicePage() {
               <Clock className="h-4 w-4" />
               <span>Duración: {service.duration}</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold mb-6">
-              {service.title}
-            </h1>
-            <p className="text-lg text-muted-foreground mb-8">
-              {service.description}
-            </p>
+            <h1 className="font-display text-4xl sm:text-5xl font-bold mb-6">{service.title}</h1>
+            <p className="text-lg text-muted-foreground mb-8">{service.description}</p>
             <Link to={`/reservar?servicio=${service.id}`}>
               <Button size="lg" className="font-semibold gap-2">
                 Reservar {service.title} <ArrowRight className="h-4 w-4" />
@@ -58,9 +54,7 @@ export default function ServicePage() {
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="font-display text-2xl font-bold mb-6">
-                Beneficios del tratamiento
-              </h2>
+              <h2 className="font-display text-2xl font-bold mb-6">Beneficios del tratamiento</h2>
               <ul className="space-y-4">
                 {service.benefits.map((benefit, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -71,9 +65,7 @@ export default function ServicePage() {
               </ul>
             </div>
             <div>
-              <h2 className="font-display text-2xl font-bold mb-6">
-                Condiciones que tratamos
-              </h2>
+              <h2 className="font-display text-2xl font-bold mb-6">Condiciones que tratamos</h2>
               <ul className="space-y-4">
                 {service.conditions.map((condition, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -93,11 +85,10 @@ export default function ServicePage() {
       <section className="section-padding bg-muted/30">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">
-              ¿Listo para comenzar tu tratamiento?
-            </h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">¿Listo para comenzar tu tratamiento?</h2>
             <p className="text-muted-foreground mb-8">
-              Agenda tu cita de {service.title.toLowerCase()} hoy. Nuestro equipo te atenderá de manera profesional y personalizada.
+              Agenda tu cita de {service.title.toLowerCase()} hoy. Nuestro equipo te atenderá de manera profesional y
+              personalizada.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to={`/reservar?servicio=${service.id}`}>
@@ -107,7 +98,7 @@ export default function ServicePage() {
               </Link>
               <a href="tel:+528112345678">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto font-semibold">
-                  Llamar: 81 1234 5678
+                  Llamar: 84 42 56 56 67
                 </Button>
               </a>
             </div>
@@ -118,9 +109,7 @@ export default function ServicePage() {
       {/* Other Services */}
       <section className="section-padding">
         <div className="container">
-          <h2 className="font-display text-2xl font-bold mb-8 text-center">
-            Otros servicios que ofrecemos
-          </h2>
+          <h2 className="font-display text-2xl font-bold mb-8 text-center">Otros servicios que ofrecemos</h2>
           <div className="grid sm:grid-cols-3 gap-6">
             {otherServices.map((s) => (
               <Link
@@ -134,9 +123,7 @@ export default function ServicePage() {
                 <h3 className="font-display font-semibold mb-2 group-hover:text-primary transition-colors">
                   {s.title}
                 </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {s.shortDescription}
-                </p>
+                <p className="text-sm text-muted-foreground line-clamp-2">{s.shortDescription}</p>
               </Link>
             ))}
           </div>
