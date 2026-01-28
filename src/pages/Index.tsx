@@ -4,7 +4,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { TestimonialCard } from "@/components/TestimonialCard";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/services";
-import { CheckCircle2, MapPin, Award, Users, ArrowRight } from "lucide-react";
+import { CheckCircle2, Home, Award, Users, ArrowRight } from "lucide-react";
 
 const testimonials = [
   {
@@ -46,15 +46,15 @@ export default function Index() {
         <div className="container section-padding">
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6 animate-fade-up">
-              <MapPin className="h-4 w-4" />
-              <span>Monterrey y Zona Metropolitana</span>
+              <Home className="h-4 w-4" />
+              <span>Atención a domicilio en Monterrey y Zona Metropolitana</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 animate-fade-up" style={{ animationDelay: "0.1s" }}>
               Tu bienestar físico{" "}
               <span className="text-gradient">comienza aquí</span>
             </h1>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: "0.2s" }}>
-              Centro de rehabilitación y terapia física en Monterrey. Tratamientos personalizados para recuperar tu movilidad y mejorar tu calidad de vida.
+              Fisioterapia y rehabilitación a domicilio en Monterrey. Tratamientos personalizados para recuperar tu movilidad y mejorar tu calidad de vida.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: "0.3s" }}>
               <Link to="/reservar">
@@ -62,7 +62,7 @@ export default function Index() {
                   Reservar Cita <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <a href="tel:+528112345678">
+              <a href="tel:+528443565667">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto font-semibold">
                   Llamar Ahora
                 </Button>
@@ -77,11 +77,11 @@ export default function Index() {
         <div className="container py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div className="space-y-1">
-              <div className="text-2xl font-display font-bold text-primary">500+</div>
+              <div className="text-2xl font-display font-bold text-primary">200+</div>
               <div className="text-sm text-muted-foreground">Pacientes Atendidos</div>
             </div>
             <div className="space-y-1">
-              <div className="text-2xl font-display font-bold text-primary">10+</div>
+              <div className="text-2xl font-display font-bold text-primary">9</div>
               <div className="text-sm text-muted-foreground">Años de Experiencia</div>
             </div>
             <div className="space-y-1">
@@ -90,7 +90,7 @@ export default function Index() {
             </div>
             <div className="space-y-1">
               <div className="text-2xl font-display font-bold text-primary">100%</div>
-              <div className="text-sm text-muted-foreground">Profesionales Certificados</div>
+              <div className="text-sm text-muted-foreground">Atención Personalizada</div>
             </div>
           </div>
         </div>
@@ -135,11 +135,11 @@ export default function Index() {
               </p>
               <ul className="space-y-4">
                 {[
-                  "Profesionales certificados y en constante capacitación",
-                  "Equipamiento moderno y técnicas actualizadas",
+                  "Fisioterapeuta certificado con 9 años de experiencia",
+                  "Equipamiento portátil y técnicas actualizadas",
                   "Planes de tratamiento personalizados",
-                  "Ambiente cómodo y acogedor",
-                  "Ubicación céntrica y fácil acceso",
+                  "Atención en la comodidad de tu hogar",
+                  "Servicio a domicilio en toda la Zona Metropolitana",
                   "Horarios flexibles para tu comodidad",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -166,12 +166,12 @@ export default function Index() {
                   </p>
                 </div>
               </div>
-              <div className="space-y-4 pt-8">
+                <div className="space-y-4 pt-8">
                 <div className="p-6 rounded-xl bg-card border border-border card-elevated">
-                  <MapPin className="h-8 w-8 text-primary mb-3" />
-                  <h3 className="font-display font-semibold mb-1">Ubicación Central</h3>
+                  <Home className="h-8 w-8 text-primary mb-3" />
+                  <h3 className="font-display font-semibold mb-1">A Domicilio</h3>
                   <p className="text-sm text-muted-foreground">
-                    Fácil acceso desde toda la zona metropolitana
+                    Atención en la comodidad de tu hogar
                   </p>
                 </div>
                 <div className="p-6 rounded-xl bg-secondary">
@@ -210,10 +210,10 @@ export default function Index() {
       <section className="section-padding bg-muted/30">
         <div className="container text-center">
           <h2 className="font-display text-2xl sm:text-3xl font-bold mb-4">
-            Atendemos en toda la Zona Metropolitana
+            Servicio a Domicilio en toda la Zona Metropolitana
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Nuestro centro está ubicado en Monterrey con fácil acceso desde todos los municipios.
+            Llevo mi equipo profesional directamente a tu hogar. Atención personalizada sin necesidad de desplazarte.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {locations.map((location) => (
@@ -244,7 +244,7 @@ export default function Index() {
                   Reservar Cita Ahora
                 </Button>
               </Link>
-              <a href="https://wa.me/528112345678" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/528443565667" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto font-semibold border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
                   Contactar por WhatsApp
                 </Button>
