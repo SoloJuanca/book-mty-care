@@ -249,7 +249,6 @@ export default function BookingPage() {
               appointment_date: format(formData.date, "yyyy-MM-dd"),
               appointment_time: formData.time + ":00",
             },
-            admin_email: "ccarlosmmora13@gmail.com", // TODO: Make this configurable
           },
         })
         .then((res) => {
