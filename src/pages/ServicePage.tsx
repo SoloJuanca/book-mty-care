@@ -83,7 +83,7 @@ export default function ServicePage() {
         <title>{service.metaTitle}</title>
         <meta name="description" content={service.metaDescription} />
         <meta name="keywords" content={`${service.title.toLowerCase()}, fisioterapia monterrey, ${service.conditions?.join(", ").toLowerCase()}, a domicilio monterrey`} />
-        <link rel="canonical" href={`https://robertonietoft.com/${service.slug}`} />
+        <link rel="canonical" href={`https://robertonieto.mx/${service.slug}`} />
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         {service.faqItems && (
           <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
