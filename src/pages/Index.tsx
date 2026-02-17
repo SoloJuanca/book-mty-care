@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { ServiceCard } from "@/components/ServiceCard";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { AboutSection } from "@/components/AboutSection";
 import { Button } from "@/components/ui/button";
 import { services } from "@/lib/services";
 import { CheckCircle2, Home, Award, Users, ArrowRight } from "lucide-react";
@@ -76,8 +77,11 @@ export default function Index() {
         </div>
       </section>
 
+      {/* About Roberto */}
+      <AboutSection />
+
       {/* Services Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-muted/30">
         <div className="container">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4">Nuestros Servicios</h2>
