@@ -28,7 +28,7 @@ export function AboutSection() {
               Conoce a <span className="text-gradient">Roberto Nieto</span>
             </h2>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              Soy Roberto Nieto, fisioterapeuta certificado con más de 9 años de experiencia en rehabilitación física y
+              Soy Roberto Nieto, fisioterapeuta certificado con más de 10 años de experiencia en rehabilitación física y
               terapia manual. Mi pasión es ayudar a mis pacientes a recuperar su movilidad y mejorar su calidad de vida
               desde la comodidad de su hogar.
             </p>

@@ -62,7 +62,7 @@ export default function Index() {
               <div className="text-sm text-muted-foreground">Pacientes Atendidos</div>
             </div>
             <div className="space-y-1">
-              <div className="text-2xl font-display font-bold text-primary">9</div>
+              <div className="text-2xl font-display font-bold text-primary">10+</div>
               <div className="text-sm text-muted-foreground">Años de Experiencia</div>
             </div>
             <div className="space-y-1">
@@ -117,7 +117,7 @@ export default function Index() {
               </p>
               <ul className="space-y-4">
                 {[
-                  "Fisioterapeuta certificado con 9 años de experiencia",
+                  "Fisioterapeuta certificado con 10 años de experiencia",
                   "Equipamiento portátil y técnicas actualizadas",
                   "Planes de tratamiento personalizados",
                   "Atención en la comodidad de tu hogar",
