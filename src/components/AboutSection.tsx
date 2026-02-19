@@ -18,7 +18,7 @@ export function AboutSection() {
               />
             </div>
             <div className="absolute -bottom-4 -right-4 p-4 rounded-xl bg-primary text-primary-foreground shadow-lg hidden sm:block">
-              <p className="font-display font-bold text-2xl">9+</p>
+              <p className="font-display font-bold text-2xl">10+</p>
               <p className="text-sm opacity-90">Años de experiencia</p>
             </div>
           </div>
@@ -28,10 +28,14 @@ export function AboutSection() {
               Conoce a <span className="text-gradient">Roberto Nieto</span>
             </h2>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              Soy Roberto Nieto, fisioterapeuta certificado con más de 9 años de experiencia en rehabilitación física y terapia manual. Mi pasión es ayudar a mis pacientes a recuperar su movilidad y mejorar su calidad de vida desde la comodidad de su hogar.
+              Soy Roberto Nieto, fisioterapeuta certificado con más de 9 años de experiencia en rehabilitación física y
+              terapia manual. Mi pasión es ayudar a mis pacientes a recuperar su movilidad y mejorar su calidad de vida
+              desde la comodidad de su hogar.
             </p>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Me especializo en rehabilitación musculoesquelética, quiropraxia y terapias de relajación. Cada plan de tratamiento que diseño es único, adaptado a las necesidades y objetivos de cada paciente, utilizando técnicas actualizadas y equipo portátil profesional.
+              Me especializo en rehabilitación musculoesquelética, quiropraxia y terapias de relajación. Cada plan de
+              tratamiento que diseño es único, adaptado a las necesidades y objetivos de cada paciente, utilizando
+              técnicas actualizadas y equipo portátil profesional.
             </p>
 
             <div className="grid sm:grid-cols-3 gap-4 mb-8">
