@@ -8,9 +8,11 @@ interface ServiceCardProps {
   icon: LucideIcon;
   href: string;
   duration: string;
+  price?: string;
+  priceLabel?: string;
 }
 
-export function ServiceCard({ title, description, icon: Icon, href, duration }: ServiceCardProps) {
+export function ServiceCard({ title, description, icon: Icon, href, duration, price, priceLabel }: ServiceCardProps) {
   return (
     <Link
       to={href}
@@ -25,6 +27,14 @@ export function ServiceCard({ title, description, icon: Icon, href, duration }: 
       <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
         {description}
       </p>
+      {price && (
+        <div className="mb-4 p-3 rounded-lg bg-primary/5 border border-primary/10">
+          <span className="text-xl font-display font-bold text-primary">{price}</span>
+          {priceLabel && (
+            <span className="block text-xs text-muted-foreground mt-0.5">{priceLabel}</span>
+          )}
+        </div>
+      )}
       <div className="flex items-center justify-between">
         <span className="text-xs text-muted-foreground bg-muted px-2 py-1 rounded">
           {duration}

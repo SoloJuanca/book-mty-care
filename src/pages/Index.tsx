@@ -99,6 +99,8 @@ export default function Index() {
                 icon={service.icon}
                 href={`/${service.slug}`}
                 duration={service.duration}
+                price={service.price}
+                priceLabel={service.priceLabel}
               />
             ))}
           </div>
