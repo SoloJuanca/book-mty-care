@@ -402,9 +402,14 @@ export default function BookingPage() {
                   </div>
                   <h3 className="font-display font-semibold mb-1">{service.title}</h3>
                   <p className="text-sm text-muted-foreground mb-2">{service.shortDescription}</p>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3" />
-                    {service.duration}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <Clock className="h-3 w-3" />
+                      {service.duration}
+                    </div>
+                    {service.price && (
+                      <span className="text-sm font-display font-bold text-primary">{service.price}</span>
+                    )}
                   </div>
                 </button>
               ))}
