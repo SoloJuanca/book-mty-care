@@ -18,6 +18,9 @@ export const services = [
     slug: "rehabilitacion",
     title: "Rehabilitación Física",
     shortDescription: "Recuperación funcional profesional para lesiones y padecimientos musculoesqueléticos.",
+    price: "$850",
+    priceLabel: "Primera valoración y tratamiento",
+    priceNote: "Terapias subsecuentes: $550 c/u. Paquetes disponibles para planes de tratamiento.",
     description:
       "Nuestro programa de rehabilitación física a domicilio en Monterrey está diseñado para ayudarte a recuperar tu movilidad y funcionalidad después de lesiones, cirugías o padecimientos crónicos. Roberto Nieto, con más de 10 años de experiencia, utiliza técnicas avanzadas y equipamiento portátil especializado para acelerar tu recuperación sin que tengas que salir de casa.",
     icon: Activity,
@@ -87,6 +90,8 @@ export const services = [
     slug: "quiropraxia",
     title: "Quiropraxia",
     shortDescription: "Ajustes quiroprácticos para aliviar dolor y mejorar la función del sistema nervioso.",
+    price: "$500",
+    priceLabel: "Quiropraxia con masaje y movilidad asistida",
     description:
       "La quiropraxia es una disciplina de la salud que se enfoca en el diagnóstico, tratamiento y prevención de trastornos del sistema músculo-esquelético, especialmente de la columna vertebral. Roberto Nieto realiza ajustes precisos a domicilio en Monterrey para mejorar tu bienestar general sin necesidad de desplazarte.",
     icon: Bone,
@@ -156,6 +161,8 @@ export const services = [
     slug: "masajes-descontracturantes",
     title: "Masajes Descontracturantes",
     shortDescription: "Técnicas profundas para liberar tensión muscular y contracturas.",
+    price: "$900",
+    priceLabel: "Cuerpo completo",
     description:
       "El masaje descontracturante es una técnica terapéutica profunda que trabaja sobre los tejidos musculares para liberar la tensión acumulada, disolver contracturas y mejorar la circulación sanguínea. Ideal para quienes sufren de estrés laboral o realizan actividad física intensa. Roberto Nieto lleva este tratamiento a tu hogar en Monterrey.",
     icon: Sparkles,
@@ -225,6 +232,8 @@ export const services = [
     slug: "masajes-relajantes",
     title: "Masajes Relajantes",
     shortDescription: "Experiencia de relajación profunda para cuerpo y mente.",
+    price: "$800",
+    priceLabel: "Cuerpo completo",
     description:
       "Nuestro masaje relajante combina técnicas suaves y movimientos fluidos para proporcionar una experiencia de bienestar integral. Perfecto para reducir el estrés del día a día, mejorar la calidad del sueño y reconectar con tu cuerpo. Roberto Nieto lleva esta experiencia de spa directamente a tu hogar en Monterrey y zona metropolitana.",
     icon: Heart,

@@ -2,7 +2,7 @@ import { useLocation, Link, Navigate } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { getServiceBySlug, services, metropolitanAreas } from "@/lib/services";
-import { CheckCircle2, Clock, ArrowRight, ArrowLeft, MapPin, Phone, HelpCircle } from "lucide-react";
+import { CheckCircle2, Clock, ArrowRight, ArrowLeft, MapPin, Phone, HelpCircle, DollarSign } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import {
   Accordion,
@@ -111,11 +111,29 @@ export default function ServicePage() {
                 <MapPin className="h-4 w-4" />
                 A domicilio en Monterrey
               </span>
+              {service.price && (
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                  <DollarSign className="h-4 w-4" />
+                  {service.price} — {service.priceLabel}
+                </span>
+              )}
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-bold mb-6">
               {service.title} a Domicilio en Monterrey
             </h1>
-            <p className="text-lg text-muted-foreground mb-8">{service.description}</p>
+            <p className="text-lg text-muted-foreground mb-6">{service.description}</p>
+            {service.price && (
+              <div className="p-5 rounded-xl bg-card border border-primary/20 mb-8">
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-3xl font-display font-bold text-primary">{service.price}</span>
+                  <span className="text-muted-foreground text-sm">MXN</span>
+                </div>
+                <p className="text-sm text-muted-foreground">{service.priceLabel}</p>
+                {service.priceNote && (
+                  <p className="text-sm text-muted-foreground mt-2 pt-2 border-t border-border">{service.priceNote}</p>
+                )}
+              </div>
+            )}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link to={`/reservar?servicio=${service.id}`}>
                 <Button size="lg" className="w-full sm:w-auto font-semibold gap-2">
