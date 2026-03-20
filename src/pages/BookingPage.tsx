@@ -186,7 +186,13 @@ export default function BookingPage() {
           );
         });
 
-        if (!isBooked && !isBlocked && (isBefore(currentEnd, endTime) || currentEnd.getTime() === endTime.getTime())) {
+        // If today, require 4 hours of anticipation
+        const minTime = isToday(formData.date!) ? addHours(new Date(), 4) : null;
+        const slotDateTime = new Date(formData.date!);
+        slotDateTime.setHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+        const tooSoon = minTime && isBefore(slotDateTime, minTime);
+
+        if (!isBooked && !isBlocked && !tooSoon && (isBefore(currentEnd, endTime) || currentEnd.getTime() === endTime.getTime())) {
           slots.push(timeStr);
         }
 
