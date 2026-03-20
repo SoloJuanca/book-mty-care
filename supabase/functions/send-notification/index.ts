@@ -13,6 +13,7 @@ interface NotificationRequest {
     client_name: string;
     client_email?: string;
     client_phone: string;
+    client_address?: string;
     service: string;
     appointment_date: string;
     appointment_time: string;
@@ -79,7 +80,7 @@ const generateClientEmail = (appointment: NotificationRequest["appointment"], ty
             </div>
             
             <p style="color: #666; font-size: 14px;">
-              Si tienes alguna pregunta, contáctanos por WhatsApp al <a href="https://wa.me/528443565667" style="color: #2a9d8f;">844 356 5667</a>
+              Si tienes alguna pregunta, contáctanos por WhatsApp al <a href="https://wa.me/528112411746" style="color: #2a9d8f;">81 1241 1746</a>
             </p>
           </div>
           
@@ -125,7 +126,7 @@ const generateClientEmail = (appointment: NotificationRequest["appointment"], ty
             <p>Te esperamos en la fecha y hora indicada. Por favor ten lista el área donde se realizará la sesión.</p>
             
             <p style="color: #666; font-size: 14px;">
-              ¿Necesitas reagendar? Contáctanos al <a href="https://wa.me/528443565667" style="color: #2a9d8f;">844 356 5667</a>
+              ¿Necesitas reagendar? Contáctanos al <a href="https://wa.me/528112411746" style="color: #2a9d8f;">81 1241 1746</a>
             </p>
           </div>
         </body>
@@ -195,6 +196,7 @@ const generateAdminEmail = (appointment: NotificationRequest["appointment"], typ
           <h3 style="margin-top: 0;">Datos del Cliente</h3>
           <p><strong>Nombre:</strong> ${appointment.client_name}</p>
           <p><strong>Teléfono:</strong> <a href="tel:${appointment.client_phone}">${appointment.client_phone}</a></p>
+          ${appointment.client_address ? `<p><strong>Dirección:</strong> ${appointment.client_address}</p>` : ""}
           ${appointment.client_email ? `<p><strong>Email:</strong> <a href="mailto:${appointment.client_email}">${appointment.client_email}</a></p>` : ""}
         </div>
         

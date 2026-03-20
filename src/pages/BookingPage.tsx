@@ -35,6 +35,7 @@ interface FormData {
   name: string;
   phone: string;
   email: string;
+  address: string;
   notes: string;
 }
 
@@ -62,6 +63,7 @@ export default function BookingPage() {
     name: "",
     phone: "",
     email: "",
+    address: "",
     notes: "",
   });
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
@@ -205,7 +207,7 @@ export default function BookingPage() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.date || !formData.service || !formData.time || !formData.name || !formData.phone) {
+    if (!formData.date || !formData.service || !formData.time || !formData.name || !formData.phone || !formData.address) {
       toast({
         title: "Error",
         description: "Por favor completa todos los campos requeridos.",
@@ -230,6 +232,7 @@ export default function BookingPage() {
         client_name: formData.name,
         client_phone: formData.phone,
         client_email: formData.email || null,
+        client_address: formData.address,
         notes: formData.notes || null,
         user_id: user?.id || null,
       });
@@ -245,6 +248,7 @@ export default function BookingPage() {
               client_name: formData.name,
               client_email: formData.email || undefined,
               client_phone: formData.phone,
+              client_address: formData.address,
               service: formData.service,
               appointment_date: format(formData.date, "yyyy-MM-dd"),
               appointment_time: formData.time + ":00",
@@ -333,6 +337,10 @@ export default function BookingPage() {
                   <span className="text-muted-foreground">Teléfono:</span>
                   <span className="font-medium">{formData.phone}</span>
                 </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Dirección:</span>
+                  <span className="font-medium text-right max-w-[60%]">{formData.address}</span>
+                </div>
               </CardContent>
             </Card>
 
@@ -340,7 +348,7 @@ export default function BookingPage() {
               <Button onClick={() => navigate("/")} className="font-semibold">
                 Volver al Inicio
               </Button>
-              <a href="https://wa.me/528442565667" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/528112411746" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="w-full font-semibold">
                   Contactar por WhatsApp
                 </Button>
@@ -568,6 +576,19 @@ export default function BookingPage() {
                   />
                 </div>
                 <div className="space-y-2">
+                  <Label htmlFor="address">Dirección de la sesión *</Label>
+                  <Input
+                    id="address"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    placeholder="Calle, número, colonia, municipio"
+                    required
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    📍 Servicio a domicilio en Monterrey y Zona Metropolitana. Proporciona tu dirección para que podamos acudir a tu sesión.
+                  </p>
+                </div>
+                <div className="space-y-2">
                   <Label htmlFor="notes">Notas adicionales (opcional)</Label>
                   <Textarea
                     id="notes"
@@ -585,7 +606,7 @@ export default function BookingPage() {
                   </Button>
                   <Button
                     onClick={handleSubmit}
-                    disabled={!formData.name || !formData.phone || submitting}
+                    disabled={!formData.name || !formData.phone || !formData.address || submitting}
                     className="flex-1 font-semibold gap-2"
                   >
                     {submitting ? (
