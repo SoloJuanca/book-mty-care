@@ -232,6 +232,7 @@ export default function BookingPage() {
         client_name: formData.name,
         client_phone: formData.phone,
         client_email: formData.email || null,
+        client_address: formData.address,
         notes: formData.notes || null,
         user_id: user?.id || null,
       });
