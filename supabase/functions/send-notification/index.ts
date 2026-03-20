@@ -13,6 +13,7 @@ interface NotificationRequest {
     client_name: string;
     client_email?: string;
     client_phone: string;
+    client_address?: string;
     service: string;
     appointment_date: string;
     appointment_time: string;
