@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { services, getServiceById } from "@/lib/services";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { format, addDays, isBefore, startOfToday, parse } from "date-fns";
+import { format, addDays, addHours, isBefore, isToday, startOfToday, parse } from "date-fns";
 import { es } from "date-fns/locale";
 import {
   CheckCircle2,
@@ -186,7 +186,13 @@ export default function BookingPage() {
           );
         });
 
-        if (!isBooked && !isBlocked && (isBefore(currentEnd, endTime) || currentEnd.getTime() === endTime.getTime())) {
+        // If today, require 4 hours of anticipation
+        const minTime = isToday(formData.date!) ? addHours(new Date(), 4) : null;
+        const slotDateTime = new Date(formData.date!);
+        slotDateTime.setHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+        const tooSoon = minTime && isBefore(slotDateTime, minTime);
+
+        if (!isBooked && !isBlocked && !tooSoon && (isBefore(currentEnd, endTime) || currentEnd.getTime() === endTime.getTime())) {
           slots.push(timeStr);
         }
 
