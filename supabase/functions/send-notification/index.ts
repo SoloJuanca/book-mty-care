@@ -126,7 +126,7 @@ const generateClientEmail = (appointment: NotificationRequest["appointment"], ty
             <p>Te esperamos en la fecha y hora indicada. Por favor ten lista el área donde se realizará la sesión.</p>
             
             <p style="color: #666; font-size: 14px;">
-              ¿Necesitas reagendar? Contáctanos al <a href="https://wa.me/528443565667" style="color: #2a9d8f;">844 356 5667</a>
+              ¿Necesitas reagendar? Contáctanos al <a href="https://wa.me/528112411746" style="color: #2a9d8f;">81 1241 1746</a>
             </p>
           </div>
         </body>
