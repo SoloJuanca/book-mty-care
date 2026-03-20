@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { services, getServiceById } from "@/lib/services";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { format, addDays, isBefore, startOfToday, parse } from "date-fns";
+import { format, addDays, addHours, isBefore, isToday, startOfToday, parse } from "date-fns";
 import { es } from "date-fns/locale";
 import {
   CheckCircle2,
