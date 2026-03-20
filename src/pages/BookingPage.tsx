@@ -348,7 +348,7 @@ export default function BookingPage() {
               <Button onClick={() => navigate("/")} className="font-semibold">
                 Volver al Inicio
               </Button>
-              <a href="https://wa.me/528442565667" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/528112411746" target="_blank" rel="noopener noreferrer">
                 <Button variant="outline" className="w-full font-semibold">
                   Contactar por WhatsApp
                 </Button>
