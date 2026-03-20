@@ -201,7 +201,7 @@ export default function Index() {
                   Reservar Cita Ahora
                 </Button>
               </Link>
-              <a href="https://wa.me/528443565667" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/528112411746" target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
                   variant="outline"

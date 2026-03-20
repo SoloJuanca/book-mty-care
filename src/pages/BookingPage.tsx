@@ -606,7 +606,7 @@ export default function BookingPage() {
                   </Button>
                   <Button
                     onClick={handleSubmit}
-                    disabled={!formData.name || !formData.phone || submitting}
+                    disabled={!formData.name || !formData.phone || !formData.address || submitting}
                     className="flex-1 font-semibold gap-2"
                   >
                     {submitting ? (

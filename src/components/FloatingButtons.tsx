@@ -13,7 +13,7 @@ export function FloatingButtons() {
         <MessageCircle className="h-6 w-6" />
       </a>
       <a
-        href="tel:+528443565667"
+        href="tel:+528112411746"
         className="btn-phone h-14 w-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
         aria-label="Llamar ahora"
       >
