@@ -248,6 +248,7 @@ export default function BookingPage() {
               client_name: formData.name,
               client_email: formData.email || undefined,
               client_phone: formData.phone,
+              client_address: formData.address,
               service: formData.service,
               appointment_date: format(formData.date, "yyyy-MM-dd"),
               appointment_time: formData.time + ":00",
