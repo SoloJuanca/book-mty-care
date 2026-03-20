@@ -337,6 +337,10 @@ export default function BookingPage() {
                   <span className="text-muted-foreground">Teléfono:</span>
                   <span className="font-medium">{formData.phone}</span>
                 </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Dirección:</span>
+                  <span className="font-medium text-right max-w-[60%]">{formData.address}</span>
+                </div>
               </CardContent>
             </Card>
 
