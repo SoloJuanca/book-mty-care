@@ -207,7 +207,7 @@ export default function BookingPage() {
   };
 
   const handleSubmit = async () => {
-    if (!formData.date || !formData.service || !formData.time || !formData.name || !formData.phone) {
+    if (!formData.date || !formData.service || !formData.time || !formData.name || !formData.phone || !formData.address) {
       toast({
         title: "Error",
         description: "Por favor completa todos los campos requeridos.",
