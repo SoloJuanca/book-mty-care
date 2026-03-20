@@ -576,6 +576,19 @@ export default function BookingPage() {
                   />
                 </div>
                 <div className="space-y-2">
+                  <Label htmlFor="address">Dirección de la sesión *</Label>
+                  <Input
+                    id="address"
+                    value={formData.address}
+                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                    placeholder="Calle, número, colonia, municipio"
+                    required
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    📍 Servicio a domicilio en Monterrey y Zona Metropolitana. Proporciona tu dirección para que podamos acudir a tu sesión.
+                  </p>
+                </div>
+                <div className="space-y-2">
                   <Label htmlFor="notes">Notas adicionales (opcional)</Label>
                   <Textarea
                     id="notes"
