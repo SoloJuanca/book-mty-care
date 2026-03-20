@@ -84,8 +84,26 @@ export function Footer() {
           <p className="text-sm text-background/50">
             © {new Date().getFullYear()} Rehabs MTY | Roberto Nieto. Todos los derechos reservados.
           </p>
-          <div className="flex gap-4 text-sm text-background/50">
-            <Link to="/admin" className="hover:text-background transition-colors">
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.instagram.com/roberto.fisio1?igsh=NWxrcWR0a3UxanIy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/50 hover:text-background transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.facebook.com/share/1GfLhj8iVf/?mibextid=wwXIfr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-background/50 hover:text-background transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
+            <Link to="/admin" className="text-sm text-background/50 hover:text-background transition-colors">
               Admin
             </Link>
           </div>
