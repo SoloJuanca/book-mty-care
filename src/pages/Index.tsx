@@ -43,7 +43,7 @@ export default function Index() {
                   Reservar Cita <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <a href="tel:+528443565667">
+              <a href="tel:+528112411746">
                 <Button size="lg" variant="outline" className="w-full sm:w-auto font-semibold">
                   Llamar Ahora
                 </Button>
