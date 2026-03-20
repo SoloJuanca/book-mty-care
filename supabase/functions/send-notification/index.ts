@@ -196,6 +196,7 @@ const generateAdminEmail = (appointment: NotificationRequest["appointment"], typ
           <h3 style="margin-top: 0;">Datos del Cliente</h3>
           <p><strong>Nombre:</strong> ${appointment.client_name}</p>
           <p><strong>Teléfono:</strong> <a href="tel:${appointment.client_phone}">${appointment.client_phone}</a></p>
+          ${appointment.client_address ? `<p><strong>Dirección:</strong> ${appointment.client_address}</p>` : ""}
           ${appointment.client_email ? `<p><strong>Email:</strong> <a href="mailto:${appointment.client_email}">${appointment.client_email}</a></p>` : ""}
         </div>
         
