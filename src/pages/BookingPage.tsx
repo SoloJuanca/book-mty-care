@@ -63,6 +63,7 @@ export default function BookingPage() {
     name: "",
     phone: "",
     email: "",
+    address: "",
     notes: "",
   });
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
