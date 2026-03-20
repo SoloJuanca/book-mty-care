@@ -80,7 +80,7 @@ const generateClientEmail = (appointment: NotificationRequest["appointment"], ty
             </div>
             
             <p style="color: #666; font-size: 14px;">
-              Si tienes alguna pregunta, contáctanos por WhatsApp al <a href="https://wa.me/528443565667" style="color: #2a9d8f;">844 356 5667</a>
+              Si tienes alguna pregunta, contáctanos por WhatsApp al <a href="https://wa.me/528112411746" style="color: #2a9d8f;">81 1241 1746</a>
             </p>
           </div>
           
